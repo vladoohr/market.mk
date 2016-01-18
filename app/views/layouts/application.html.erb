@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Market</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<%= render 'layouts/header' %>
+
+<div class="marginTop">
+	<%= render 'layouts/messages'%>
+	
+	<%= yield %>
+</div>
+
+<%= render 'layouts/footer'%>
+
+<script>
+	$( document ).ready(function() {
+		$(".contentMiddle").css("min-height",$(window).height() - 50);
+		
+		$(".jumbotron").css("padding-top", $(window).height()/2-$(".jumbotron").height()/2);
+		
+		$(window).on('resize', function(){
+			$(".jumbotron").css("padding-top", $(window).height()/2-$(".jumbotron").height()/2)
+		});
+	});
+
+</script>
+</body>
+</html>

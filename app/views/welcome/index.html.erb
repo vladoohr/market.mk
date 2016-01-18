@@ -1,0 +1,45 @@
+<div class="contentMiddle">
+	<div class="jumbotron">
+		<div class="container">
+
+			<div class="col-md-3">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Golf 6, Iphone 5s, Aprilia" >
+				</div>
+			</div><!-- col-md-4 -->
+
+	  	<div class="col-md-3">
+		    <div class="input-group">
+
+		    <% # select_tag(:id, options_for_select(@categories), class: "form-control") %>
+
+		    <select class="form-control">
+		    	<option>Сите категории</option>
+		    	<% @categories.to_a.reverse.to_h.each do |k, v| %>
+		    		<% if v.values.first == nil %>
+		    			<option value="<%= v.keys.first %>"><%= k %></option>
+		    		<% else %>
+		    			<option value="<%= v.keys.first %>" style="background: #bababa"><%= k %></option>
+		    		<% end %>
+		    	<% end %>
+		    </select>
+		    
+		    </div><!-- <input-group"> -->
+		  </div><!-- col-md-4 -->
+
+		  <div class="col-md-3">
+		  	<div class="input-group">
+		    	<% cities_array = City.all.map { |city| [city.name, city.id] } %>
+		    	<%= select_tag(:id, options_for_select(cities_array, ["Цела Македонија", 33]), class: "form-control") %>
+	  		</div>
+	  	</div><!-- col-md-4 -->
+
+	  	<div class="col-md-3">
+	  		<div class="input-group">
+	  			<button type="submit" class="btn btn-default btn-background btn-width">Барај</button>
+	  		</div>
+	  	</div>
+
+	  </div><!-- container -->
+	</div><!-- jumbotron -->
+</div>

@@ -1,0 +1,15 @@
+<% if obj.errors.any? %>
+	<div class="row">
+		<div class="container">
+			<div class="col-md-6 col-md-offset-3 alert alert-danger">
+				<ul>
+					<% obj.errors.values.each do |messages| %>
+						<% messages.each do |msg| %>
+							<li><%= msg %></li>
+						<% end %>	
+					<% end %>
+				</ul>
+			</div>
+		</div>
+	</div>
+<% end %>

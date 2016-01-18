@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  state: MyString
+  title: MyString
+  description: MyString
+  price: 1
+  latitude: 9.99
+  longitude: 9.99
+
+two:
+  type: 
+  state: MyString
+  title: MyString
+  description: MyString
+  price: 1
+  latitude: 9.99
+  longitude: 9.99

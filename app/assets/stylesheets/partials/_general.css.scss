@@ -1,0 +1,82 @@
+	@import 'variables';
+
+.background-color-dark {
+	background-color: $black;
+}
+
+.text-gray {
+	color: $text-gray;
+}
+
+.vert-offset-top-1 {
+    margin-top: 1em;
+}
+
+.extension {
+	color: $red;
+}
+
+.btn-background {
+	background-color: $black;
+	border: 1px solid $hover-background;
+	color: $text-gray;
+}
+
+.contentMiddle {
+	background-image: image-url("background2.jpeg");	
+	width:100% ;
+	background-size:cover;
+}
+
+.marginTop {
+	margin-top: 50px;
+}
+
+.paddingTop {
+	padding-top: 50px;
+}
+
+.jumbotron {
+   background: rgb(200, 54, 54); /* This is for ie8 and below */
+   background: rgba(200, 54, 54, 0.0);
+ }
+
+.map {
+	width: 100%;
+	height: 400px;
+	margin-bottom: 20px;
+}
+ .center{
+	text-align: center;
+}
+
+.btn-width {
+	min-width: 197px;
+}
+
+.padding-top-form{
+	padding-top: 100px;
+}
+
+.radio-buttons {
+	label {
+		font-weight: normal;
+		margin: 0px;
+		padding: 0px;
+	}
+}
+
+input, textarea, select, .uneditable-input {
+	border: 1px solid #d2d2d2;
+	border-radius: 5px;
+	width: 100%;
+	margin-bottom: 15px; 
+}
+
+h1 {
+	text-align: center;
+}
+
+a:hover {
+	text-decoration: none;
+}

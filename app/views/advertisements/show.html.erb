@@ -57,7 +57,11 @@
 			    	<option>Сите категории</option>
 			    	<% @categories.to_a.reverse.to_h.each do |k, v| %>
 			    		<% if v.values.first == nil %>
+<<<<<<< HEAD
+			    			<option value="<%= v.keys.first %>" ><%= k %></option>
+=======
 			    			<option value="<%= v.keys.first %>" %>><%= k %></option>
+>>>>>>> 9880d5835ab8033a68754a214a96ab04a9bd36a1
 			    		<% else %>
 			    			<option value="<%= v.keys.first %>" style="background: #bababa"><%= k %></option>
 			    		<% end %>
@@ -88,6 +92,15 @@
 	// add listener for setting marker on click
 	handler.buildMap({
 		provider: {	}, internal: {id: 'map'}}, function(){
+<<<<<<< HEAD
+
+			if (document.getElementById("advertisement_latitude").value) {
+				marker = placeMarker(new google.maps.LatLng(document.getElementById("advertisement_latitude").value, document.getElementById("advertisement_longitude").value));
+			}
+
+
+=======
+>>>>>>> 9880d5835ab8033a68754a214a96ab04a9bd36a1
 			google.maps.event.addListener(handler.getMap(), 'click', function(event) {
 				marker = placeMarker(event.latLng);
 				document.getElementById("advertisement_latitude").value = event.latLng.lat();

@@ -1,5 +1,11 @@
 class AdvertisementsController < ApplicationController
 	before_action :all_ordered_catwgories, only: [:new, :show]
+<<<<<<< HEAD
+	before_action :require_user, except: [:create]
+
+	def new
+		@advertisement = Advertisement.new		
+=======
 
 	def new
 		if logged_in?
@@ -8,6 +14,7 @@ class AdvertisementsController < ApplicationController
 			flash[:danger] = "Мора да бидите логирани за да ја извршите акцијата!"
 			redirect_to :back
 		end
+>>>>>>> 9880d5835ab8033a68754a214a96ab04a9bd36a1
 	end
 
 	def create
@@ -25,6 +32,14 @@ class AdvertisementsController < ApplicationController
 
 	def show
 		@advertisement = Advertisement.find(params[:id])
+<<<<<<< HEAD
+
+		@hash = Gmaps4rails.build_markers(@advertisement) do |advert, marker|
+		  marker.lat advert.latitude
+		  marker.lng advert.longitude
+		end
+=======
+>>>>>>> 9880d5835ab8033a68754a214a96ab04a9bd36a1
 	end
 
 	def destroy

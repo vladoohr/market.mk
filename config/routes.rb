@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users, except: :new do
     member do
       get 'show_password'
+      get 'adverts'
       post 'update_password' 
     end
   end
@@ -16,7 +17,12 @@ Rails.application.routes.draw do
   post '/login' => 'logins#create'
   get '/logout' => 'logins#destroy'
 
-  resources :advertisements
+  resources :advertisements do
+    collection do
+      get 'adverts'
+      post 'search'
+    end
+  end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

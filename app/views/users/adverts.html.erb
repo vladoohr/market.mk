@@ -1,0 +1,45 @@
+<div class="paddingTop" ng-app="myAdverts" ng-controller="advertsCtrl">
+	<%= render 'shared/title', title: "Огласи" %>
+	<div class="container">
+		
+		<div class="form-horizontal form-group">
+    	<label for="inputSearch" class="col-md-1 control-label">Барај:</label>
+    	<div class="col-md-11">
+      	<input type="text" class="form-control" id="inputSearch" ng-model="search">
+    	</div>
+  	</div>
+		
+		<div class="row" ng-repeat="advert in adverts | filter : search">
+				<div class="col-md-6">
+					<h3><%= link_to '{{advert.title}}', '/advertisements/{{advert.id}}' %></h3>
+					<h6>{{advert.price}}</h6>
+				</div>
+				<div class="pull-right">
+					<p>
+						<%= link_to "Промени", '/advertisements/{{advert.id}}/edit', class:"btn btn-primary"%>
+						<%= link_to "Избриши", '/advertisements/{{advert.id}}', method: 'DELETE', data: {confirm: "Дали сте сигурени?"}, class:"btn btn-danger"%>
+					</p>
+					<p>Категорија: {{ advert.category }}</p>
+					<p>Град: {{ advert.city }}</p>
+					<p>{{ advert.time }}</p>
+				</div>
+				<div class="col-md-12">
+					<hr/>
+				</div>
+		</div>
+	</div>
+</div>
+<script>
+	var myAdvs = angular.module("myAdverts", ['ngResource']);
+
+	myAdvs.controller("advertsCtrl", function($scope, Adverts){
+		$scope.adverts = Adverts.query();
+		console.log($scope.adverts);
+	});
+
+	myAdvs.factory("Adverts", ['$resource', function($resource){
+		return $resource('/users/' + <%= params[:id] %> + '/adverts.json', {}, {
+			query: {method: 'GET', isArray: true}
+		})	
+	}]);
+</script>

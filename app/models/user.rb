@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	has_many :advertisement, dependent: :destroy
+	has_many :advertisements, dependent: :destroy
 
 	before_save {self.email = email.downcase}
 

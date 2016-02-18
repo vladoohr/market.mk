@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:show, :edit, :update, :show_password, :update_password] 
+	skip_before_action :verify_authenticity_token
+	before_action :set_user, only: [:show, :edit, :update, :show_password, :update_password, :adverts] 
+	respond_to :html, :json
 
 	def new
 		@user = User.new
@@ -33,6 +35,15 @@ class UsersController < ApplicationController
 	end
 
 	def show_password
+	end
+
+	def adverts
+		@adverts = []
+		@user.advertisements.each do |advert|
+			@adverts.push({id: advert.id, title: advert.title, category: advert.category.name, city: advert.city.name, \
+				price: advert.price ? "#{advert.price} денари" : "По договор", time: advert.updated_at.strftime("%d-%m-%Y %H:%M")  })
+		end
+		respond_with(@adverts)
 	end
 
 	def update_password

@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
 	def adverts
 		@adverts = []
-		@user.advertisements.each do |advert|
+		@user.advertisements.order("updated_at DESC").each do |advert|
 			@adverts.push({id: advert.id, title: advert.title, category: advert.category.name, city: advert.city.name, \
 				price: advert.price ? "#{advert.price} денари" : "По договор", time: advert.updated_at.strftime("%d-%m-%Y %H:%M"), \
 				picture: advert.photos[0] ? advert.photos[0].image.url : nil})

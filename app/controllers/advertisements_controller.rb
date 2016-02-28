@@ -42,7 +42,7 @@ class AdvertisementsController < ApplicationController
 
 	def update
 		if @advertisement.update(advertisement_params)
-			flash[:success] = "Успешно го променавте огласот"
+			flash[:success] = "Успешно го променавте огласот!"
 			redirect_to adverts_user_path(current_user)
 		else
 			render :edit

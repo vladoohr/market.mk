@@ -5,9 +5,12 @@ class AdvertisementsController < ApplicationController
 
 	def index
 		if params[:search] != "" or params[:category_id] != "0" or params[:city_id] != "33"
-				@advertisements = Advertisement.search( params[:search], params[:category_id], params[:city_id]).paginate(:page => params[:page], :per_page => 5).order("updated_at DESC")
+				@advertisements = Advertisement.search( params[:search], params[:category_id], params[:city_id])
+												.paginate(:page => params[:page], :per_page => 5)
+												.order("updated_at DESC")
 		else
-			@advertisements = Advertisement.paginate(:page => params[:page], :per_page => 5).order("updated_at DESC")
+			@advertisements = Advertisement.paginate(:page => params[:page], :per_page => 5)
+											.order("updated_at DESC")
 		end
 		render :adverts
 	end

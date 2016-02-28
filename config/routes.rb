@@ -20,9 +20,10 @@ Rails.application.routes.draw do
   resources :advertisements do
     collection do
       get 'adverts'
-      post 'search'
     end
   end
+
+  resources :photos
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

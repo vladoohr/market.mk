@@ -10,7 +10,10 @@
   	</div>
 		
 		<div class="row" ng-repeat="advert in adverts | filter : search">
-				<div class="col-md-6">
+				<div class="col-md-3">
+					 <img src="{{advert.picture}}" alt="No image" height="100" width="200"> 
+				</div>
+				<div class="col-md-4">
 					<h3><%= link_to '{{advert.title}}', '/advertisements/{{advert.id}}' %></h3>
 					<h6>{{advert.price}}</h6>
 				</div>

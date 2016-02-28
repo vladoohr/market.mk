@@ -1,11 +1,11 @@
 <div class="paddingTop">
 	<div class="container">
 		<%= render 'search_form' %>
-
+		
 		<% @advertisements.each do |advert| %>
 			<div class="col-md-10 col-md-offset-1 advert">
 				<div class="pull-left">
-				Image
+				<%= image_tag(advert.photos[0].image.url, size: '200x100') if advert.photos[0] %>
 				<p><%= advert.updated_at.strftime("%d-%m-%Y %H:%M") %></p>
 				</div>
 				<div class="col-md-4">
@@ -24,6 +24,7 @@
 				</div>
 			</div>
 		<% end%>
+		<%= will_paginate %>
 	</div>
 
 	<hr>

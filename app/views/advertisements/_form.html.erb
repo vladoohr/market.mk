@@ -4,14 +4,29 @@
 
 <div class="row">
 		<div class="col-md-6 col-md-offset-3">
-			<%= form_for @advertisement do |f| %>
+			<%= form_for(@advertisement, html: {multipart: true}) do |f| %>
 
-			 <% if params[:action] == "show" %>
-			 	<%= content_tag(:h1, @advertisement[:title]) %>
-			 	<%= link_to "Избриши", advertisement_path, method: :delete, data: {confirm: "Дали сте сигурен?"}, class:"btn btn-primary pull-right" %>
-			 	<%= link_to "Промени", edit_advertisement_path, class:"btn btn-primary marginRight10 pull-right" %>
-			 <% end %>
-				
+				<% if params[:action] == "show" %>
+					<div>
+						<%= content_tag(:h1, @advertisement[:title]) %>
+						<%= link_to "Избриши", advertisement_path, method: :delete, data: {confirm: "Дали сте сигурен?"}, class:"btn btn-primary pull-right" %>
+						<%= link_to "Промени", edit_advertisement_path, class:"btn btn-primary marginRight10 pull-right" %>
+					</div>
+				<% end %>
+
+				<%= label_tag :image, "Слики: "%>
+				<% if !@advertisement.photos[0] %>
+					<div>
+						<%= file_field_tag "images[]",type: :file, multiple: true, accept: 'image/jpeg, image/gif, image/png' %>
+					</div>
+				<% else %>
+					<div>
+					<% @advertisement.photos.each do |photo| %>
+						<%= image_tag(photo.image.url, size: '200x100')%>
+					<% end %>
+					</div>
+				<% end %>
+
 				<%= f.label :advert_type, "Тип* " %>
 				<div class="radio-buttons">
 					<label>
@@ -90,6 +105,14 @@
 </div>
 
 <script>
+$('#images_').bind('change', function(){
+	size_in_megabytes = this.files[0].size/1024/1024;
+	if(size_in_megabytes > 5){
+		$('#images_').val('');
+		alert('Maximum file size is 5MB. Please choose smaller file!');
+	}
+});
+
 	var marker;
 	handler = Gmaps.build('Google');
 

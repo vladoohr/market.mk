@@ -1,9 +1,18 @@
 class AdvertisementsController < ApplicationController
-	before_action :all_ordered_catwgories, only: [:new, :show, :edit, :search]
-	before_action :require_user, except: [:index, :create, :search, :adverts]
-	before_action :find_user, only: [:show, :edit, :update, :destroy]
+	before_action :all_ordered_categories, only: [:new, :show, :edit, :search, :index]
+	before_action :require_user, except: [:index, :create, :search, :adverts, :show]
+	before_action :find_advert, only: [:show, :edit, :update, :destroy]
 
 	def index
+		if params[:search] != "" or params[:category_id] != "0" or params[:city_id] != "33"
+				@advertisements = Advertisement.search( params[:search], params[:category_id], params[:city_id])
+										                    .paginate(:page => params[:page], :per_page => 5)
+																				.order("updated_at DESC")
+		else
+			@advertisements = Advertisement.paginate(:page => params[:page], :per_page => 5)
+																			.order("updated_at DESC")
+		end
+		render :adverts
 	end
 
 	def new
@@ -11,10 +20,18 @@ class AdvertisementsController < ApplicationController
 	end
 
 	def create
-		@advertisement = Advertisement.new(advertisement_params)
-		@advertisement.user = current_user
+		@advertisement = current_user.advertisements.build(advertisement_params)
+		# authorize @advertisement
+		# @advertisement = Advertisement.new(advertisement_params)
+		# @advertisement.user = current_user
 
-		if @advertisement.save 
+		if @advertisement.save
+			if params[:images]
+					params[:images].each do |img|
+          	@advertisement.photos.create(image: img)
+          end
+      end
+
 			flash[:success] = "Успешно внесовте оглас!"
 			redirect_to root_path # to be change to user's adverts
 		else
@@ -39,18 +56,8 @@ class AdvertisementsController < ApplicationController
 
 	def destroy
 		@advertisement.destroy
-		redirect_to root_path # change to redirect_to user's adverts
+		redirect_to :back
 		flash[:success ] = "Огласот е избришан!"
-	end
-
-	def search
-			if params[:search] != "" or params[:category_id] != "0" or params[:city_id] != "33"
-				@advertisements = Advertisement.search(params[:search], params[:category_id], params[:city_id])
-			else
-				@advertisements = Advertisement.all.order("updated_at DESC")
-			end
-
-			render :adverts
 	end
 
 	def adverts
@@ -61,11 +68,11 @@ class AdvertisementsController < ApplicationController
 			params.require(:advertisement).permit(:advert_type, :state, :title, :description, :price, :latitude, :longitude, :city_id, :category_id)
 		end
 
-		def find_user
+		def find_advert
 			@advertisement = Advertisement.find(params[:id])
 		end
 
-		def all_ordered_catwgories
+		def all_ordered_categories
 			@categories = {}
 			categories_main = Category.where(parent_id: nil)
 			categories_main.each do |category|

@@ -1,35 +1,30 @@
-<%= form_tag(search_advertisements_path, :method => "post", id: "search-form" ) do %>
+<%= form_tag(advertisements_path, :method => "get", id: "search-form" ) do %>
 	<div class="col-md-3">
-		<div class="input-group">
-			<%=  text_field_tag :search, params[:search], class: "form-control", placeholder: "Iphone 6, BMW ..."%>
-	  </div>
-	</div><!-- col-md-3 -->
+		<%=  text_field_tag :search, params[:search], class: "form-control", placeholder: "Iphone 6, BMW ..."%>
+	</div>
 
 	<div class="col-md-3">
-	  <div class="input-group">
-		  <select id="category_id" ng-model="adverts.category" name="category_id" class="form-control">
-		  	<option value="0">Сите категории</option>
-		  	<% @categories.to_a.reverse.to_h.each do |k, v| %>
-		  		<% if v.values.first == nil %>
-		  			<option value="<%= v.keys.first %>"><%= k %></option>
-		  		<% else %>
-		  			<option value="<%= v.keys.first %>" style="background: #bababa"><%= k %></option>
-		  		<% end %>
-		  	<% end %>
-		  </select>
-	  </div>
-	</div><!-- col-md-3 -->
+	  <select id="category_id" ng-model="adverts.category" name="category_id" class="form-control">
+	  	<option value="0">Сите категории</option>
+	  	<% @categories.to_a.reverse.to_h.each do |k, v| %>
+	  		<% if v.values.first == nil %>
+	  			<option value="<%= v.keys.first %>"><%= k %></option>
+	  		<% else %>
+	  			<option value="<%= v.keys.first %>" style="background: #bababa"><%= k %></option>
+	  		<% end %>
+	  	<% end %>
+	  </select>	  
+	</div>
 
 	<div class="col-md-3">
-		<div class="input-group">
-	    <% cities_array = City.all.map { |city| [city.name, city.id] } %>
-	  	<%= select_tag(:city_id, options_for_select(cities_array, ["Цела Македонија", 33]), class: "form-control") %>
-	  </div>
-	</div><!-- col-md-3 -->
+    <% 
+    	cities_array = City.all.map { |city| [city.name, city.id] }
+  		selected_value = params[:city_id] ? [City.find(params[:city_id]).name, params[:city_id]] : ["Цела Македонија", 33]
+    %>
+  	<%= select_tag(:city_id, options_for_select(cities_array, selected_value), class: "form-control") %>	  
+	</div>
 
 	<div class="col-md-3">
-		<div class="input-group">
-			<%= submit_tag "Барај", class: "btn btn-default btn-background btn-width" %>  
-		</div><!-- col-md-3 -->
+		<%= submit_tag "Барај", class: "btn btn-default btn-background btn-width" %>  
 	</div>
 <% end %>

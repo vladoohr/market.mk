@@ -40,6 +40,15 @@ gem 'bcrypt', '3.1.7'
 # For respond_to feature
 gem 'responders', '~> 2.1'
 
+# file upload solution
+gem 'carrierwave', '0.10.0'
+# photo resizing
+gem 'mini_magick', '3.8.0'
+# for AWS S3
+gem 'fog', '1.23.0'
+
+# pagination
+gem 'will_paginate', '~> 3.0.7  '
 # Use Unicorn as the app server
 # gem 'unicorn'
 

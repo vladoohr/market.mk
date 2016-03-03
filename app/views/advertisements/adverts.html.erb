@@ -9,7 +9,7 @@
 				<p><%= advert.updated_at.strftime("%d-%m-%Y %H:%M") %></p>
 				</div>
 				<div class="col-md-4">
-					<p><%= link_to advert.title, advertisement_path(advert.id) %></p>
+					<p><%= link_to advert.title, public_advertisement_path(advert.id) %></p>
 					<p><%= advert.price ? advert.price : "По договор" %></p>
 				</div>
 				<div class="pull-right">

@@ -1,0 +1,21 @@
+<div class="paddingTop">
+	<div class="container">
+		<div class="row">
+			<%= render 'shared/title', title: @advertisement.title %>
+			<div class="col-md-6">		
+				<div class="pull-left">
+					<% @advertisement.photos.each do |image| %>
+						<%= image_tag(image.image, size: '200x100') %>
+					<% end %>
+				</div>
+			<p><%= @advertisement.updated_at.strftime("%d-%m-%Y %H:%M") %></p>
+			</div>
+			<div class="col-md-6">
+				<p><%= @advertisement.description %></p>
+				<p><%= @advertisement.state %>: <%= @advertisement.price %> денари</p>
+				<p><%= @advertisement.city.name %></p>
+				<p><%= @advertisement.category.name %></p>
+			</div>
+		</div>
+	</div>
+</div>

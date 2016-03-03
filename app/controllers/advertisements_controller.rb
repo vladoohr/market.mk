@@ -1,7 +1,7 @@
 class AdvertisementsController < ApplicationController
 	before_action :all_ordered_categories, only: [:new, :show, :edit, :search, :index]
 	before_action :require_user, except: [:index, :create, :search, :adverts, :show]
-	before_action :find_advert, only: [:show, :edit, :update, :destroy]
+	before_action :find_advert, only: [:show, :edit, :update, :destroy, :public]
 
 	def index
 		if params[:search] != "" or params[:category_id] != "0" or params[:city_id] != "33"
@@ -59,6 +59,9 @@ class AdvertisementsController < ApplicationController
 	end
 
 	def adverts
+	end
+
+	def public
 	end
 
 	private

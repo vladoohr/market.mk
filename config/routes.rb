@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   get '/logout' => 'logins#destroy'
 
   resources :advertisements do
+    member do
+      get 'public'
+    end
+    
     collection do
       get 'adverts'
     end
